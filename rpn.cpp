@@ -1,5 +1,6 @@
 #include "rpn.h"
 #include <stack>
+#include <cmath>
 
 double calculateRPN(const std::string& expr) {
     std::stack<double> st;
@@ -26,7 +27,7 @@ double calculateRPN(const std::string& expr) {
             else if (k == '/')
                 num = st.top() / num;
             else if (k == '^')
-                num = std::pow(st.top(), num);
+                num = pow(st.top(), num);
             st.pop();
             st.push(num);
         }
