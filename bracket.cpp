@@ -30,5 +30,5 @@ bool checkBrackets(const std::string& s) {
                 return false;
             br.pop();
         }
-    return true;
+    return std::size(br) == 0;
 }
