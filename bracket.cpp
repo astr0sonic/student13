@@ -1,4 +1,5 @@
 #include "bracket.h"
+#include <stack>
 
 bool checkBrackets(const std::string& s) {
     std::stack<int> br;
