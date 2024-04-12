@@ -5,7 +5,7 @@ int getMaxVolume(int a, int b, int c, int n, int* arr)
     int* arr_copy = arr;
     int res = 0;
     for (int* p = arr; p + a < arr + n; p++)
-        if (std::min({ *p, p[a] }) > res && std::min({ *p, p[a] }) <= c)
+        if (*p > res && p[a] > res && (*p <= c || p[a] <= c))
         {
             res = *p;
             if (res > p[a])
