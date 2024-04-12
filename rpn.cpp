@@ -26,7 +26,7 @@ double calculateRPN(const std::string& expr) {
             else if (k == '/')
                 num = st.top() / num;
             else if (k == '^')
-                num = pow(st.top(), num);
+                num = std::pow(st.top(), num);
             st.pop();
             st.push(num);
         }
