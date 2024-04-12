@@ -2,31 +2,33 @@
 
 int getMaxVolume(int a, int b, int c, int n, int* arr)
 {
-    int* arr_cpoy = arr;
+    int* arr_copy = arr;
     int res = 0;
-    for (int* p = arr; p + a < arr + n; ++p)
-        if (*p > res && p[a] > res && *p <= c && p[a] <= c)
+    for (int* p = arr; p + a < arr + n; p++)
+        if (std::min({ *p, p[a] }) > res && std::min({ *p, p[a] }) <= c)
         {
-            res = p[a];
-            if (*p < p[a])
-                res = *p;
-            arr_cpoy = p;
+            res = *p;
+            if (res > p[a])
+                res = p[a];
+            arr_copy = p;
         }
+
+    res *= a;
     int i = 0, j = n - 1;
     if (a < n - 1)
         j = a;
     while (i < j)
     {
-        if (arr_cpoy[i] > arr_cpoy[j])
+        if (arr_copy[i] > arr_copy[j])
         {
-            if (res < arr_cpoy[j] * (j - i) && (j - i) <= a && arr_cpoy[j] <= c)
-                res = arr_cpoy[j] * (j - i);
+            if (res < arr_copy[j] * (j - i) && (j - i) <= a && arr_copy[j] <= c)
+                res = arr_copy[j] * (j - i);
             j--;
         }
         else
         {
-            if (res < arr_cpoy[i] * (j - i) && (j - i) <= a && arr_cpoy[i] <= c)
-                res = arr_cpoy[i] * (j - i);
+            if (res < arr_copy[i] * (j - i) && (j - i) <= a && arr_copy[i] <= c)
+                res = arr_copy[i] * (j - i);
             i++;
         }
     }
