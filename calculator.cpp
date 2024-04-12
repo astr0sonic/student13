@@ -128,5 +128,5 @@ double calculate(const std::string& expr)
     if (check(expr_copy))
         return calculator(expr_copy, i);
     else
-        throw std::logic_error("syntax error");
+        throw std::invalid_argument("invalid argument");
 }
