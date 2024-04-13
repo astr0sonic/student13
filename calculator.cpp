@@ -4,27 +4,27 @@
 #include <algorithm>
 #include <string>
 
-bool check(const std::string expr)
+bool check(const std::string expr, int n)
 {
     int k = 0, i = 0;
     char pred = ' ', ppred = ' ', cur = ' ';
     std::vector<char> sgn = { '+', '-', '*', '/', '^' };
-    while (size(expr))
+    while (i < n)
     {
         cur = expr[i];
         i++;
         if (find(sgn.begin(), sgn.end(), cur) == sgn.end() && cur != '(' && cur != ')' && cur != '.' && !isdigit(cur))
             return false;
-        if (pred == '(' && (find(sgn.begin(), sgn.end(), cur) == sgn.end() && cur != '(' && cur != ')'))
+        if (pred == '(' && cur != '-' && !isdigit(cur) && cur != '(')
             return false;
         if (cur == ')')
         {
-            if (find(sgn.begin(), sgn.end(), pred) == sgn.end() && pred != '(' && pred != ')')
+            k--;
+            if (!isdigit(pred) && pred != ')')
                 return false;
-            k++;
         }
         else if (cur == '(')
-            k--;
+            k++;
         if (k < 0)
             return false;
         if (find(sgn.begin(), sgn.end(), cur) != sgn.end() && find(sgn.begin(), sgn.end(), pred) != sgn.end())
@@ -125,7 +125,7 @@ double calculate(const std::string& expr)
     int i = 0;
     std::string expr_copy = expr;
     expr_copy.erase(remove_if(expr_copy.begin(), expr_copy.end(), isspace), expr_copy.end());
-    if (check(expr_copy))
+    if (check(expr_copy, size(expr_copy)))
         return calculator(expr_copy, i);
     else
         throw std::exception();
