@@ -16,7 +16,7 @@ struct Tree {
         }
     };
 };
-Tree* Build(const std::string& text) {
+Tree* build(const std::string& text) {
     std::map<char, int> letters;
     for (char c : text) {
         letters[c]++;
@@ -45,7 +45,7 @@ void Codes(Tree* root, const std::string& code, std::map<char, std::string>& cod
 }
 std::string encode(const std::string& text) {
     std::string encoded = "";
-    Tree* root = Build(text);
+    Tree* root = build(text);
     std::map<char, std::string> codes;
     Codes(root, "", codes);
     for (char c : text) {
