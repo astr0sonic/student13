@@ -53,18 +53,18 @@ std::string encode(const std::string& text) {
     }
     return encoded;
 }
-std::string decode(std::string& str, std::map<char, std::string>& codes) {
+std::string decode(const std::string& encoded, std::map<char, std::string>& codes) {
     std::string out = "";
-    std::string code;
-    std::map<std::string, char> codes_rev;
-    for (std::map<char, std::string>::iterator it = codes.begin(); it != codes.end(); it++)
-        codes_rev[it->second] = it->first;
-    for (int i = 0; i < str.length(); i++) {
-        code.push_back(str[i] == '0' ? false : true);
-        if (codes_rev[code]) {
-            out += codes_rev[code];
-            code.clear();
+    std::string code = "";
+    for (char bit : encoded) {
+        currentCode += bit;
+        for (const auto& entry : codes) {
+            if (entry.second == currentCode) {
+                out += entry.first;
+                code = "";
+                break;
+            }
         }
     }
-    return out;
+    return decoded;
 }
