@@ -57,14 +57,14 @@ std::string decode(const std::string& encoded, std::map<char, std::string>& code
     std::string out = "";
     std::string code = "";
     for (char bit : encoded) {
-        currentCode += bit;
+        code += bit;
         for (const auto& entry : codes) {
-            if (entry.second == currentCode) {
+            if (entry.second == code) {
                 out += entry.first;
                 code = "";
                 break;
             }
         }
     }
-    return decoded;
+    return out;
 }
